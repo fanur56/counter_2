@@ -1,25 +1,39 @@
-import React, {useState} from "react";
-import {Scoreboard} from "./Scoreboard";
-import {IncResetButton} from "./IncResetButton";
+import React from "react";
+import s from "./ScoreboardWithCounter.module.css";
+import {AppRootStateType} from "./store";
+import {useDispatch, useSelector} from "react-redux";
+import {incCounterAC, resetCounterAC, StateType} from "./settings-reducer";
 
 export const ScoreboardWithCounter = () => {
 
-    const [count, setCount] = useState<number>(0)
+    let values = useSelector<AppRootStateType, StateType>(state => state.values)
+    const dispatch = useDispatch()
 
     const incCounter = () => {
-        setCount(count + 1)
+        dispatch(incCounterAC())
     }
 
     const resetCounter = () => {
-        setCount(0)
+        dispatch(resetCounterAC())
     }
 
     return (
         <div>
-            <Scoreboard count={count}/>
-            <IncResetButton incCounter={incCounter}
-                    resetCounter={resetCounter}
-                    count={count}/>
+            <div className={s.board}>
+                <h3 className={values.count === values.maxValue ? s.h3 : ''}>
+                    {(values.maxValue - values.startValue) > 0 ? values.count : "Incorrect values"}
+                </h3>
+            </div>
+            <div className={s.container}>
+                <button className={s.button}
+                        disabled={values.count >= values.maxValue}
+                        onClick={incCounter}>inc
+                </button>
+                <button className={s.button}
+                        disabled={values.count === values.startValue}
+                        onClick={resetCounter}>reset
+                </button>
+            </div>
         </div>
     )
 }

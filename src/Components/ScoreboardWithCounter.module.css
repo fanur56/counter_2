@@ -14,3 +14,16 @@
     color: red;
     font-size: 35px;
 }
+
+.button {
+    background-color: cornflowerblue;
+    margin: 2px;
+    border-radius: 10px;
+    border: solid cornflowerblue 2px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

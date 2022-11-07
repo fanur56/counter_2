@@ -1,13 +1,11 @@
 import s from "./Settings.module.css";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "./store";
-import {setSettingAC, StateType} from "./settings-reducer";
+import {useDispatch} from "react-redux";
+import {setSettingAC} from "./settings-reducer";
 import {ChangeEvent, useState} from "react";
 
 
 export const Settings = () => {
 
-    let values = useSelector<AppRootStateType, StateType>(state => state.values)
     let dispatch = useDispatch()
 
     const [maxValue, setMaxValue] = useState<number>(5)
@@ -28,12 +26,12 @@ export const Settings = () => {
             <div className={s.container_input}>
                 <div className={s.item}>
                     <span>max value:</span> <input type={"number"}
-                                                   value={values.maxValue}
+                                                   value={maxValue}
                                                    onChange={onMaxValueChangeHandler}/>
                 </div>
                 <div className={s.item}>
                     <span>start value:</span> <input type={"number"}
-                                                     value={values.startValue}
+                                                     value={startValue}
                                                      onChange={onStartValueChangeHandler}/>
                 </div>
             </div>
