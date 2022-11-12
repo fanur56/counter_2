@@ -1,7 +1,7 @@
-type ActionsType = setSettingAT | incCounterAT | resetCounterAT
 type setSettingAT = ReturnType<typeof setSettingAC>
 type incCounterAT = ReturnType<typeof incCounterAC>
 type resetCounterAT = ReturnType<typeof resetCounterAC>
+type ActionsType = setSettingAT & incCounterAT & resetCounterAT
 
 export type StateType = {
     maxValue: number
@@ -15,7 +15,7 @@ const initialState: StateType = {
     count: 0
 }
 
-export const settingsReducer = (state = initialState, action: ActionsType): StateType => {
+export const settingsReducer = (state = initialState, action: ActionsType ): StateType => {
     switch (action.type) {
         case "SET_SETTING":
             return {
